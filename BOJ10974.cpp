@@ -40,3 +40,38 @@ int main(void)
 	DFS(0, N);
 	return 0;
 }
+
+/* next_permutation
+// BOJ 10974. 모든 순열
+
+#include<stdio.h>
+#include<algorithm>
+
+using namespace std;
+
+int N;
+int arr[10];
+
+
+int main(void)
+{
+
+	scanf("%d", &N);
+	for (int i = 0; i < N; i++)
+	{
+		arr[i] = i + 1;
+	}
+	do
+	{
+		for (int j = 0; j < N; j++)
+		{
+			printf("%d ", arr[j]);
+		}
+		printf("\n");
+
+	} while (next_permutation(arr, arr + N));
+	return 0;
+}
+
+
+*/
