@@ -63,3 +63,81 @@ int main(void)
 	}
 	return 0;
 }
+
+/* <다른 사람 풀이>
+#include<cstdio>
+#include<queue>
+#include<vector>
+#include<algorithm>
+
+
+using namespace std;
+
+int n, k;
+int p[100002];
+queue<int> q;
+
+
+int ntok(void) 
+{
+	fill(p, p + k + 2, -1);
+
+	q.push(n);
+	p[n] = n;
+
+	int lv = 0;
+	while (!q.empty()) 
+	{
+		int sz = q.size();
+		for (int i = 0; i < sz; i++) 
+		{
+			int curr = q.front();
+			q.pop();
+
+			if (curr == k)
+				return lv;
+
+			if (curr < k && p[curr + 1] == -1) 
+			{
+				p[curr + 1] = curr;
+				q.push(curr + 1);
+			}
+			if (curr > 0 && p[curr - 1] == -1) {
+				p[curr - 1] = curr;
+				q.push(curr - 1);
+			}
+			if (2 * curr <= k + 1 && p[2 * curr] == -1) {
+				p[2 * curr] = curr;
+				q.push(2 * curr);
+			}
+		}
+		lv++;
+	}
+	return -1;
+}
+
+
+int main(void) {
+	scanf("%d %d", &n, &k);
+
+	if (k <= n) {
+		printf("%d\n", n - k);
+		for (int i = n; i >= k; i--)
+			printf("%d ", i);
+	}
+	else {
+		printf("%d\n", ntok());
+
+		vector<int> path;
+		while (k != n) {
+			path.push_back(k);
+			k = p[k];
+		}
+		printf("%d ", n);
+		for (int i = path.size() - 1; i >= 0; i--)
+			printf("%d ", path[i]);
+	}
+
+	return 0;
+}
+*/
