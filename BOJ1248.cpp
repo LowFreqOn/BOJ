@@ -82,3 +82,100 @@ int main(void)
 
 	return 0;
 }
+
+/* < 처음에 틀린 풀이 >
+
+
+#include<stdio.h>
+
+int N;
+char arr[57];
+int N_arr[12];
+bool final_state = false;
+
+void Recursion(int depth, int cur_sum)
+{
+	if (depth == N)
+	{
+			bool state = true;
+			int cnt = 0;
+			for (int k = 1; k < N; k++)
+			{
+				int sum_check = 0;
+				char check_sign = {};
+				for (int l = 0; l < N - k; l++)
+				{
+					sum_check = sum_check + N_arr[k+l];
+					//printf("%d\n", sum_check);
+					if (sum_check > 0)check_sign = '+';
+					else if (sum_check < 0)check_sign = '-';
+					else check_sign = '0';
+
+					if (arr[N + cnt] != check_sign)
+					{
+						state = false;
+						return;
+					}
+					cnt++;
+				}
+			}
+
+			if (state == true)
+			{
+				for (int m = 0; m < N; m++)
+				{
+					printf("%d ", N_arr[m]);
+				}
+				printf("\n");
+				final_state = true;
+			}
+		return;
+	}
+
+	if (arr[depth] == '+')
+	{
+		for (int j = -10; j < 11; j++)
+		{
+			if (cur_sum + j <= 0)continue;
+			N_arr[depth] = j;
+			cur_sum = cur_sum + j;
+			Recursion(depth + 1, cur_sum);
+			cur_sum = cur_sum - j;
+			if (final_state == true)return;
+		}
+	}
+	else if (arr[depth] == '-')
+	{
+		for (int j = -10; j < 11; j++)
+		{
+			if (cur_sum + j >= 0)continue;
+			N_arr[depth] = j;
+			cur_sum = cur_sum + j;
+			Recursion(depth + 1, cur_sum);
+			cur_sum = cur_sum - j;
+			if (final_state == true)return;
+		}
+	}
+	else
+	{
+		for (int j = -10; j < 11; j++)
+		{
+			if (cur_sum + j != 0)continue;
+			N_arr[depth] = j;
+			cur_sum = cur_sum + j;
+			Recursion(depth + 1, cur_sum);
+			cur_sum = cur_sum - j;
+			if (final_state == true)return;
+		}
+	}
+	return;
+}
+
+int main(void)
+{
+	scanf("%d", &N);
+	scanf("%s", &arr);
+
+	Recursion(0, 0);
+	return 0;
+}*/
