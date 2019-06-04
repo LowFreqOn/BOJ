@@ -1,4 +1,4 @@
-//BOJ 11047 동전
+//BOJ 11047 동전0
 #include<iostream>
 #include<string>
 using namespace std;
